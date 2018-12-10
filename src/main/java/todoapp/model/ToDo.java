@@ -2,7 +2,6 @@ package todoapp.model;
 
 
 import java.util.*;
-import java.util.stream.*;
 
 public class ToDo {
 

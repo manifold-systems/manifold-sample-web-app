@@ -1,10 +1,8 @@
 package todoapp;
 
-import manifold.templates.runtime.ILayout;
 import spark.Request;
 import todoapp.model.ToDo;
 import todoapp.model.ToDo.Status;
-import todoapp.view.layouts.Main;
 import todoapp.view.todo.Display;
 import todoapp.view.todo.Edit;
 
@@ -64,7 +62,7 @@ public class App {
   }
 
   private static String renderEditTodo(Request req) {
-    return Edit.render(ILayout.EMPTY, ToDo.DAO.find(req.params("id")));
+    return Edit.render(ToDo.DAO.find(req.params("id")));
   }
 
   private static String renderTodos(Request req) {
@@ -80,7 +78,7 @@ public class App {
     if ("true".equals(req.queryParams("ic-request"))) {
       return Display.render(todos, filter, activeCount, anyComplete, allComplete);
     } else {
-      return Display.render(Main.asLayout(), todos, filter, activeCount, anyComplete, allComplete);
+      return Display.render(todos, filter, activeCount, anyComplete, allComplete);
     }
   }
 
