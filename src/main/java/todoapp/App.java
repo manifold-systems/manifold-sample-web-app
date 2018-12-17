@@ -1,8 +1,10 @@
 package todoapp;
 
+import manifold.templates.ManifoldTemplates;
 import spark.Request;
 import todoapp.model.ToDo;
 import todoapp.model.ToDo.Status;
+import todoapp.view.layouts.Main;
 import todoapp.view.todo.Display;
 import todoapp.view.todo.Edit;
 
@@ -16,7 +18,9 @@ public class App {
 
     exception(Exception.class, (e, req, res) -> e.printStackTrace()); // print all exceptions
     staticFiles.location("/public");
-    port(9999);
+    port(4567);
+
+    ManifoldTemplates.setDefaultLayout("todoapp", Main.asLayout());
 
     // Render main UI
     get("/", (req, res) -> renderTodos(req));
@@ -62,7 +66,7 @@ public class App {
   }
 
   private static String renderEditTodo(Request req) {
-    return Edit.render(ToDo.DAO.find(req.params("id")));
+    return Edit.withoutLayout().render(ToDo.DAO.find(req.params("id")));
   }
 
   private static String renderTodos(Request req) {
@@ -76,7 +80,7 @@ public class App {
     boolean allComplete = ToDo.DAO.all().size() == ToDo.DAO.ofStatus(Status.COMPLETE).size();
 
     if ("true".equals(req.queryParams("ic-request"))) {
-      return Display.render(todos, filter, activeCount, anyComplete, allComplete);
+      return Display.withoutLayout().render(todos, filter, activeCount, anyComplete, allComplete);
     } else {
       return Display.render(todos, filter, activeCount, anyComplete, allComplete);
     }

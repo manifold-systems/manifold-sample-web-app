@@ -1,2 +1,29 @@
 # manifold-sample-web-app
-A sample Spark-based web application using ManTL (Manifold Templates) and Intercooler
+A sample [Spark](http://sparkjava.com/)-based web application using Manifold Templates ([ManTL](http://manifold.systems/manifold-templates.html)) 
+and [Intercooler](https://intercoolerjs.org/)
+
+### Usage
+
+#### Running and Using the App
+* Run the `todoapp.App` class directly with Java
+* _or_ load this project in [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) and run the `todoapp.App` class
+* Launch a browser and go to `http://localhost:4567`
+
+
+#### Editing ManTL Files
+* Install the Manifold IntelliJ plugin directly from IntelliJ IDEA:
+
+<kbd>Settings</kbd> ➜ <kbd>Plugins</kbd> ➜ <kbd>Browse repositories</kbd> ➜ search: <kbd>Manifold</kbd>
+  
+* Close and relaunch IDEA
+* Open this project and begin editing *.mtl files directly 
+
+The Manifold plugin provides professional quality template editing including comprehensive support for IntelliJ's Java 
+support.
+
+
+#### Hot Swap Usage
+* Open this project in IntelliJ IDEA and debug the `todoapp.App` class
+* Launch a browser and go to `http://localhost:4567` 
+* Make changes to any ManTL file (*.mtl) and build your changes: <kbd>Build</kbd> ➜ <kbd>Build Project</kbd>
+* Reload the page in your browser to see your changes 
