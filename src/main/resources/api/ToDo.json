@@ -1,0 +1,29 @@
+{
+  "$id": "https://example.com/restapi/ToDo.json",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "ToDo",
+  "type": "object",
+  "definitions": {
+    "Status": {
+      "enum": ["active", "complete"],
+      "description": "The status of the Todo: 'active' or 'complete'"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Uniquely identifies a ToDo",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "description": "The text of the ToDo",
+      "maxLength": 80
+    },
+    "status": {
+      "$ref": "#/definitions/Status",
+      "default": "active"
+    }
+  },
+  "required": ["id", "title", "status"]
+}

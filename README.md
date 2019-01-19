@@ -9,18 +9,14 @@ and [Intercooler](https://intercoolerjs.org/)
 * _or_ load this project in [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) and run the `todoapp.App` class
 * Launch a browser and go to `http://localhost:4567`
 
+#### Developing ManTL Files & the JSON Schema API
+The Manifold plugin for IntelliJ provides professional quality ManTL template authoring as well as JSON Schema editing
+including code completion, usage searching, navigation, and refactoring.
 
-#### Editing ManTL Files
 * Install the Manifold IntelliJ plugin directly from IntelliJ IDEA:
-
 <kbd>Settings</kbd> ➜ <kbd>Plugins</kbd> ➜ <kbd>Browse repositories</kbd> ➜ search: <kbd>Manifold</kbd>
-  
 * Close and relaunch IDEA
-* Open this project and begin editing *.mtl files directly 
-
-The Manifold plugin provides professional quality template editing including comprehensive support for IntelliJ's Java 
-support.
-
+* Open this project and begin editing *.mtl files directly
 
 #### Hot Swap Usage
 * Open this project in IntelliJ IDEA and debug the `todoapp.App` class

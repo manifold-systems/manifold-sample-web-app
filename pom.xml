@@ -4,7 +4,7 @@
 
     <groupId>manifold</groupId>
     <artifactId>manifold-sample-web-app</artifactId>
-    <version>0.13-SNAPSHOT</version>
+    <version>0.20-SNAPSHOT</version>
 
     <name>Manifold :: Sample Web App</name>
 
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>systems.manifold</groupId>
             <artifactId>manifold-all</artifactId>
-            <version>0.32-alpha</version>
+            <version>0.39-SNAPSHOT</version>
         </dependency>
 
 
