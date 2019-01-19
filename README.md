@@ -1,6 +1,8 @@
 # manifold-sample-web-app
-A sample [Spark](http://sparkjava.com/)-based web application using Manifold Templates ([ManTL](http://manifold.systems/manifold-templates.html)) 
-and [Intercooler](https://intercoolerjs.org/)
+A sample [Spark](http://sparkjava.com/)-based web application using:
+* [Manifold: Templates (ManTL)](http://manifold.systems/manifold-templates.html)
+* [Manifold: JSON Schema](http://manifold.systems/docs.html#json-and-json-schema)
+* [Intercooler](https://intercoolerjs.org/)
 
 ### Usage
 
