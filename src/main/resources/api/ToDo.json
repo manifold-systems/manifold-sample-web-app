@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/restapi/ToDo.json",
+  "$id": "https://example.com/api/ToDo.json",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "ToDo",
   "type": "object",

@@ -13,7 +13,7 @@ import java.util.*;
 import static spark.Spark.*;
 
 /**
- * Spark Web App.
+ * A sample SparkJava-based Web application.
  * <p>
  * Demonstrates using ManTL (Manifold Templates) and Manifold JSON Schema to build a simple
  * web application.
