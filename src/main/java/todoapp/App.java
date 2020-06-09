@@ -1,7 +1,7 @@
 package todoapp;
 
 import spark.Request;
-import manifold.templates.ManifoldTemplates;
+import manifold.templates.rt.ManifoldTemplates;
 import api.ToDo;
 import api.ToDo.Status;
 import todoapp.view.layouts.Main;

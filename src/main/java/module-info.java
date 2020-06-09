@@ -1,8 +1,8 @@
 module manifold.sample.web.app {
     // Use the JSON manifold for type-safe access to JSON schema and REST API
-    requires manifold.json;
+    requires manifold.json.rt;
     // Use the Templates manifold for type-safe access to Java-based templates
-    requires manifold.templates;
+    requires manifold.templates.rt;
     // Use the Collections extension library
     requires manifold.collections;
     // Use the Text extension library
@@ -10,9 +10,8 @@ module manifold.sample.web.app {
 
     // Include transitive dependencies manually since manifold jars are "automatic" modules
     // (they don't define manifold-info.java files, thus no 'requires' to their dependencies)
-    requires manifold;
-    requires manifold.ext;
+    requires manifold.rt;
+    requires manifold.ext.rt;
     requires spark.core;
-    requires java.scripting;
     requires jdk.unsupported;
 }
