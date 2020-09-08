@@ -9,7 +9,7 @@
     <name>Manifold :: Sample Web App</name>
 
     <properties>
-        <manifold.version>2020.1.26</manifold.version>
+        <manifold.version>2020.1.27</manifold.version>
     </properties>
 
     <dependencies>
@@ -22,20 +22,8 @@
         </dependency>
         <dependency>
             <groupId>systems.manifold</groupId>
-            <artifactId>manifold-json</artifactId>
-            <version>${manifold.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>systems.manifold</groupId>
             <artifactId>manifold-json-rt</artifactId>
             <version>${manifold.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>systems.manifold</groupId>
-            <artifactId>manifold-templates</artifactId>
-            <version>${manifold.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>systems.manifold</groupId>
