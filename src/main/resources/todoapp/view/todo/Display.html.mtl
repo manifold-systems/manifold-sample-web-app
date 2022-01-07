@@ -16,9 +16,9 @@
         <% for(ToDo todo : todos) { %>
             <li class="#if($todo.complete)completed#end">
                 <div class="view">
-                    <input type="checkbox" class="toggle" ic-put-to="/todos/${(todo.getId())}/toggle_status" ${((todo.getStatus() == complete) ? "checked" : "")}/>
-                    <label ic-get-from="/todos/${(todo.getId())}/edit" ic-target="closest li" ic-trigger-on="dblclick" ic-replace-target="true">${(todo.getTitle())}</label>
-                    <button class="destroy" ic-delete-from="/todos/${(todo.getId())}"></button>
+                    <input type="checkbox" class="toggle" ic-put-to="/todos/${todo.getId()}/toggle_status" ${todo.getStatus() == complete ? "checked" : ""}/>
+                    <label ic-get-from="/todos/${todo.getId()}/edit" ic-target="closest li" ic-trigger-on="dblclick" ic-replace-target="true">${todo.getTitle()}</label>
+                    <button class="destroy" ic-delete-from="/todos/${todo.getId()}"></button>
                 </div>
             </li>
         <% } %>
