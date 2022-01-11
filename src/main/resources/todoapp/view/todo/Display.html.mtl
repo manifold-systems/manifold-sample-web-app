@@ -3,14 +3,14 @@
 <%@ import static api.ToDo.Status.* %>
 <%@ params(List<ToDo> todos, String filter, int activeCount, boolean anyComplete, boolean allComplete) %>
 
-<header hx-include='{"status":"${filter}"}'>
+<header hx-vals='{"status":"${filter}"}'>
     <h1>todos</h1>
     <form id="todo-form" hx-post="/todos">
         <input id="new-todo" placeholder="What needs to be done?" name="todo-title" pattern=".{4,}" required title="> 3 chars" autofocus>
     </form>
 </header>
 
-<section id="main" hx-include='{"status":"${filter}"}'>
+<section id="main" hx-vals='{"status":"${filter}"}'>
     <input type="checkbox" name="toggle-all" hx-put="/todos/toggle_status" id="toggle-all" ${allComplete ? "checked" : ""}>
     <ul id="todo-list">
         <% for(ToDo todo : todos) { %>
@@ -37,6 +37,6 @@
     </ul>
 
     <% if(anyComplete) { %>
-        <button id="clear-completed" hx-delete="/todos/completed" hx-include='{"status":"${filter}"}'>Clear completed</button>
+        <button id="clear-completed" hx-delete="/todos/completed" hx-vals='{"status":"${filter}"}'>Clear completed</button>
     <% } %>
 </footer>
