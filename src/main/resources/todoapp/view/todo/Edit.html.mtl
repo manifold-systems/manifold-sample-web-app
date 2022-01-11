@@ -1,7 +1,7 @@
 <%@ import api.ToDo %>
 <%@ params(ToDo todo) %>
 <li class="editing">
-    <form id="edit-form" hx-put="/todos/${todo.getId()}">
-        <input id="todo-edit" hx-get="/" hx-trigger="resetEscape" name="todo-title" class="edit" value="${todo.getTitle()}" autofocus>
+    <form id="edit-form" hx-put="/todos/${todo.id}">
+        <input id="todo-edit" hx-get="/" hx-trigger="resetEscape" name="todo-title" class="edit" value="${todo.title}" autofocus>
     </form>
 </li>

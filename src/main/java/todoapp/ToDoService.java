@@ -23,11 +23,11 @@ public class ToDoService {
   }
 
   public static ToDo find(String id) {
-    return DATA.first(t -> t.getId().equals(id));
+    return DATA.first(t -> t.id.equals(id));
   }
 
   public static void update(String id, String title) {
-    find(id).setTitle(title);
+    find(id).title = title;
   }
 
   public static List<ToDo> ofStatus(String statusString) {
@@ -37,7 +37,7 @@ public class ToDoService {
   }
 
   public static List<ToDo> ofStatus(Status status) {
-    return DATA.filterToList(t -> t.getStatus() == status);
+    return DATA.filterToList(t -> t.status == status);
   }
 
   public static void remove(String id) {
@@ -45,16 +45,16 @@ public class ToDoService {
   }
 
   public static void removeCompleted() {
-    ofStatus(complete).forEach(t -> remove(t.getId()));
+    ofStatus(complete).forEach(t -> remove(t.id));
   }
 
   public static void toggleStatus(String id) {
     ToDo todo = find(id);
-    todo.setStatus(todo.getStatus() == active ? complete : active);
+    todo.status = todo.status == active ? complete : active;
   }
 
   public static void toggleAll(boolean isComplete) {
-    all().forEach(t -> t.setStatus(isComplete ? complete : active));
+    all().forEach(t -> t.status = isComplete ? complete : active );
   }
 
   public static List<ToDo> all() {
