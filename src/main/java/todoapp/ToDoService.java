@@ -1,20 +1,18 @@
 package todoapp;
 
 import java.util.*;
+
+// All the types below are automatically provided by manifold-json from the ToDo.json schema
 import api.ToDo;
 import api.ToDo.Status;
 
 import static api.ToDo.Status.*;
 
 /**
- * CRUD service for the {@code ToDo} JSON Schema.
+ * CRUD service for the {@link ToDo} JSON Schema.
  * <p>
- * Notice how the {@code ToDo} Java type not explicitly provided or generated -- this is the essence of Manifold --
- * the Java compiler is JSON Schema aware with Manifold, no need for a code generator build step, incremental
- * changes to your JSON schemas materialize instantly in your project.  Use IntelliJ to refactor and find usages
- * to/from your JSON schema files.
- * <p>
- * We will use the same JSON schema to build a REST API in another sample application.
+ * Note, the manifold-json dependency automatically projects a Java type for the {@link ToDo} schema from within the
+ * Java compiler. The manifold IntelliJ plugin provides seamless interaction with the {@link ToDo} schema as well.
  */
 public class ToDoService {
   private static final List<ToDo> DATA = new ArrayList<>();
@@ -34,8 +32,8 @@ public class ToDoService {
 
   public static List<ToDo> ofStatus(String statusString) {
     return statusString.isNullOrBlank()
-           ? DATA
-           : ofStatus(Status.valueOf(Status.class, statusString.toLowerCase()));
+      ? DATA
+      : ofStatus(Status.valueOf(Status.class, statusString.toLowerCase()));
   }
 
   public static List<ToDo> ofStatus(Status status) {
@@ -52,7 +50,7 @@ public class ToDoService {
 
   public static void toggleStatus(String id) {
     ToDo todo = find(id);
-    todo.setStatus(todo.getStatus() == active ? complete: active);
+    todo.setStatus(todo.getStatus() == active ? complete : active);
   }
 
   public static void toggleAll(boolean isComplete) {

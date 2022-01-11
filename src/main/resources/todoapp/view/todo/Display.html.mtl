@@ -3,22 +3,22 @@
 <%@ import static api.ToDo.Status.* %>
 <%@ params(List<ToDo> todos, String filter, int activeCount, boolean anyComplete, boolean allComplete) %>
 
-<header ic-include='{"status":"${filter}"}'>
+<header hx-include='{"status":"${filter}"}'>
     <h1>todos</h1>
-    <form id="todo-form" ic-post-to="/todos">
+    <form id="todo-form" hx-post="/todos">
         <input id="new-todo" placeholder="What needs to be done?" name="todo-title" pattern=".{4,}" required title="> 3 chars" autofocus>
     </form>
 </header>
 
-<section id="main" ic-include='{"status":"${filter}"}'>
-    <input type="checkbox" name="toggle-all" ic-put-to="/todos/toggle_status" id="toggle-all" ${allComplete ? "checked" : ""}>
+<section id="main" hx-include='{"status":"${filter}"}'>
+    <input type="checkbox" name="toggle-all" hx-put="/todos/toggle_status" id="toggle-all" ${allComplete ? "checked" : ""}>
     <ul id="todo-list">
         <% for(ToDo todo : todos) { %>
             <li class="#if($todo.complete)completed#end">
                 <div class="view">
-                    <input type="checkbox" class="toggle" ic-put-to="/todos/${todo.getId()}/toggle_status" ${todo.getStatus() == complete ? "checked" : ""}/>
-                    <label ic-get-from="/todos/${todo.getId()}/edit" ic-target="closest li" ic-trigger-on="dblclick" ic-replace-target="true">${todo.getTitle()}</label>
-                    <button class="destroy" ic-delete-from="/todos/${todo.getId()}"></button>
+                    <input type="checkbox" class="toggle" hx-put="/todos/${todo.getId()}/toggle_status" ${todo.getStatus() == complete ? "checked" : ""}>
+                    <label hx-get="/todos/${todo.getId()}/edit" hx-target="closest li" hx-trigger="dblclick" hx-swap="outerHTML">${todo.getTitle()}</label>
+                    <button class="destroy" hx-delete="/todos/${todo.getId()}"></button>
                 </div>
             </li>
         <% } %>
@@ -30,13 +30,13 @@
         <strong>${activeCount}</strong> items left
     </span>
 
-    <ul id="filters" ic-push-url="true">
-        <li <% if(filter.equals(""))         { %> class="selected" <% } %> ic-get-from="/">All</li>
-        <li <% if(filter.equals("active"))   { %> class="selected" <% } %> ic-get-from="/?status=active">Active</li>
-        <li <% if(filter.equals("complete")) { %> class="selected" <% } %> ic-get-from="/?status=complete">Completed</li>
+    <ul id="filters" hx-push-url="true">
+        <li <% if(filter.equals(""))         { %> class="selected" <% } %> hx-get="/">All</li>
+        <li <% if(filter.equals("active"))   { %> class="selected" <% } %> hx-get="/?status=active">Active</li>
+        <li <% if(filter.equals("complete")) { %> class="selected" <% } %> hx-get="/?status=complete">Completed</li>
     </ul>
 
     <% if(anyComplete) { %>
-        <button id="clear-completed" ic-delete-from="/todos/completed" ic-include='{"status":"${filter}"}'>Clear completed</button>
+        <button id="clear-completed" hx-delete="/todos/completed" hx-include='{"status":"${filter}"}'>Clear completed</button>
     <% } %>
 </footer>

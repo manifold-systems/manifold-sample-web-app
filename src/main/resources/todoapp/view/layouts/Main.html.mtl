@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-framework="intercoolerjs">
+<html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -9,15 +9,15 @@
     </head>
 
     <body>
-        <section id="todoapp" ic-target="this">
+        <section id="todoapp" hx-target="this">
           <%@ content %>
         </section>
         <div id="info">
             <p>Double-click to edit a todo</p>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="https://intercoolerreleases-leaddynocom.netdna-ssl.com/intercooler-1.2.1.min.js"></script>
+        <!--HTMX-->
+        <script src="https://unpkg.com/htmx.org@1.6.1/dist/htmx.min.js"></script>
         <script src="/js/app.js"></script>
     </body>
 

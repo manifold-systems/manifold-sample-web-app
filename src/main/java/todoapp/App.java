@@ -13,10 +13,15 @@ import java.util.*;
 import static spark.Spark.*;
 
 /**
- * A sample SparkJava-based Web application.
+ * A sample web application.
  * <p>
- * Demonstrates using ManTL (Manifold Templates) and Manifold JSON Schema to build a simple
- * web application.
+ * A simple web application utilizing the following components:
+ * <ul>
+ *   <li><a href="https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-templates">manifold-templates</a> for type-safe templates</li>
+ *   <li><a href="https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-json">manifold-json</a> for service definition</li>
+ *   <li><a href="https://sparkjava.com/">Spark</a> for web framework</li>
+ *   <li><a href="https://htmx.org/">htmx</a> for web UI</li>
+ * </ul>
  */
 public class App {
 
@@ -85,7 +90,7 @@ public class App {
     boolean anyComplete = ToDoService.ofStatus(Status.complete).size() > 0;
     boolean allComplete = ToDoService.all().size() == ToDoService.ofStatus(Status.complete).size();
 
-    if ("true".equals(req.queryParams("ic-request"))) {
+    if ("true".equals(req.queryParams("hx-request"))) {
       return Display.withoutLayout().render(todos, filter, activeCount, anyComplete, allComplete);
     } else {
       return Display.render(todos, filter, activeCount, anyComplete, allComplete);
