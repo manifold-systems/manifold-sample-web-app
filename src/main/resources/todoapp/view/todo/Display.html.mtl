@@ -14,10 +14,10 @@
     <input type="checkbox" name="toggle-all" hx-put="/todos/toggle_status" id="toggle-all" ${allComplete ? "checked" : ""}>
     <ul id="todo-list">
         <% for(ToDo todo : todos) { %>
-            <li class="#if($todo.complete)completed#end">
+            <li class="${todo.status == complete ? "completed" : ""}">
                 <div class="view">
                     <input type="checkbox" class="toggle" hx-put="/todos/${todo.id}/toggle_status" ${todo.status == complete ? "checked" : ""}>
-                    <label hx-get="/todos/${todo.id}/edit" hx-target="closest li" hx-trigger="dblclick" hx-swap="outerHTML">${todo.title}</label>
+                    <label  hx-get="/todos/${todo.id}/edit" hx-target="closest li" hx-trigger="dblclick" hx-swap="outerHTML">${todo.title}</label>
                     <button class="destroy" hx-delete="/todos/${todo.id}"></button>
                 </div>
             </li>
