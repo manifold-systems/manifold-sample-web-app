@@ -17,7 +17,7 @@ Manifold is best experienced in [IntelliJ IDEA](https://www.jetbrains.com/idea/d
 * Open this project: `manifold-sample-web-app`
 * Be sure to setup an SDK for <b>Java 11</b>:
   <kbd>Project Structure</kbd> ➜ <kbd>SDKs</kbd> ➜ <kbd>+</kbd> ➜ <kbd>JDK</kbd>
-* Or change the `pom.xml` file to use a JDK of your choosing, Manifold fully supports Java 8 - 11
+* Or change the `pom.xml` file to use a JDK of your choosing, Manifold fully supports Java 8 - 21
 
 ### Running and Using the App
 * Run the `todoapp.App` class directly with Java
