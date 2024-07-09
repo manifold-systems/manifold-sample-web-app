@@ -8,16 +8,16 @@ A sample web application using:
 ## Usage
 
 ### IntelliJ IDEA
-Manifold is best experienced in [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
+Manifold is best experienced with [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 * Install the Manifold IntelliJ plugin directly from IntelliJ IDEA:
 
   <kbd>Settings</kbd> ➜ <kbd>Plugins</kbd> ➜ <kbd>Browse repositories</kbd> ➜ search: `Manifold`
 
 * Close and relaunch IDEA
 * Open this project: `manifold-sample-web-app`
-* Be sure to setup an SDK for <b>Java 11</b>:
+* Be sure to setup an SDK for <b>Java 21</b>:
   <kbd>Project Structure</kbd> ➜ <kbd>SDKs</kbd> ➜ <kbd>+</kbd> ➜ <kbd>JDK</kbd>
-* Or change the `pom.xml` file to use a JDK of your choosing, Manifold fully supports Java 8 - 11
+* Or change the `pom.xml` file to use a JDK of your choosing, Manifold fully supports Java 8 - 21 + latest JDK release
 
 ### Running and Using the App
 * Run the `todoapp.App` class directly with Java
