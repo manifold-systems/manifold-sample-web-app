@@ -1,6 +1,8 @@
 package todoapp;
 
-import spark.Request;
+import io.javalin.Javalin;
+import io.javalin.http.Context;
+import io.javalin.http.staticfiles.Location;
 import manifold.templates.rt.ManifoldTemplates;
 import api.ToDo;
 import api.ToDo.Status;
@@ -10,8 +12,6 @@ import todoapp.view.todo.Edit;
 
 import java.util.*;
 
-import static spark.Spark.*;
-
 /**
  * A sample web application.
  * <p>
@@ -19,83 +19,91 @@ import static spark.Spark.*;
  * <ul>
  *   <li><a href="https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-templates">manifold-templates</a> for type-safe templates</li>
  *   <li><a href="https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-json">manifold-json</a> for service definition</li>
- *   <li><a href="https://sparkjava.com/">Spark</a> for web framework</li>
+ *   <li><a href="https://javalin.io/">Javalin</a> for web framework</li>
  *   <li><a href="https://htmx.org/">htmx</a> for web UI</li>
  * </ul>
  */
 public class App {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    exception(Exception.class, (e, req, res) -> e.printStackTrace()); // print all exceptions
-    staticFiles.location("/public");
-    port(4567);
+        var app = Javalin.create(config ->
+                config.staticFiles.add("/public", Location.CLASSPATH));
 
-    ManifoldTemplates.setDefaultLayout("todoapp", Main.asLayout());
+        ManifoldTemplates.setDefaultLayout("todoapp", Main.asLayout());
 
-    // Render main UI
-    get("/", (req, res) -> renderTodos(req));
+        app.exception(Exception.class,
+                (e, ctx) -> logException(e));
 
-    // Add new
-    post("/todos", (req, res) -> {
-      ToDoService.add(req.queryParams("todo-title"));
-      return renderTodos(req);
-    });
+        // Render main UI
+        app.get("/", ctx -> ctx.result(renderTodos(ctx)));
 
-    // Remove all completed
-    delete("/todos/completed", (req, res) -> {
-      ToDoService.removeCompleted();
-      return renderTodos(req);
-    });
+        // Add new
+        app.post("/todos", ctx -> {
+            ToDoService.add(ctx.req().getParameter("todo-title"));
+            ctx.result(renderTodos(ctx));
+        });
 
-    // Toggle all status
-    put("/todos/toggle_status", (req, res) -> {
-      ToDoService.toggleAll(req.queryParams("toggle-all") != null);
-      return renderTodos(req);
-    });
+        // Remove all completed
+        app.delete("/todos/completed", ctx -> {
+            ToDoService.removeCompleted();
+            ctx.result(renderTodos(ctx));
+        });
 
-    // Remove by id
-    delete("/todos/:id", (req, res) -> {
-      ToDoService.remove(req.params("id"));
-      return renderTodos(req);
-    });
+        // Toggle all status
+        app.put("/todos/toggle_status", ctx -> {
+            ToDoService.toggleAll(ctx.req().getParameter("toggle-all") != null);
+            ctx.result(renderTodos(ctx));
+        });
 
-    // Update by id
-    put("/todos/:id", (req, res) -> {
-      ToDoService.update(req.params("id"), req.queryParams("todo-title"));
-      return renderTodos(req);
-    });
+        // Remove by id
+        app.delete("/todos/{id}", ctx -> {
+            ToDoService.remove(ctx.pathParam("id"));
+            ctx.result(renderTodos(ctx));
+        });
 
-    // Toggle status by id
-    put("/todos/:id/toggle_status", (req, res) -> {
-      ToDoService.toggleStatus(req.params("id"));
-      return renderTodos(req);
-    });
+        // Update by id
+        app.put("/todos/{id}", ctx -> {
+            ToDoService.update(ctx.pathParam("id"), ctx.req().getParameter("todo-title"));
+            ctx.result(renderTodos(ctx));
+        });
 
-    // Edit by id
-    get("/todos/:id/edit", (req, res) -> renderEditTodo(req));
-  }
+        // Toggle status by id
+        app.put("/todos/{id}/toggle_status", ctx -> {
+            ToDoService.toggleStatus(ctx.pathParam("id"));
+            ctx.result(renderTodos(ctx));
+        });
 
-  private static String renderEditTodo(Request req) {
-    return Edit.withoutLayout().render(ToDoService.find(req.params("id")));
-  }
+        // Edit by id
+        app.get("/todos/{id}/edit", ctx ->
+                ctx.result(renderEditTodo(ctx)));
 
-  private static String renderTodos(Request req) {
-
-    String statusStr = req.queryParams("status");
-
-    List<ToDo> todos = ToDoService.ofStatus(statusStr);
-    String filter = Optional.ofNullable(statusStr).orElse("");
-    int activeCount = ToDoService.ofStatus(Status.active).size();
-    boolean anyComplete = ToDoService.ofStatus(Status.complete).size() > 0;
-    boolean allComplete = ToDoService.all().size() == ToDoService.ofStatus(Status.complete).size();
-
-    if ("true".equals(req.queryParams("hx-request"))) {
-      return Display.withoutLayout().render(todos, filter, activeCount, anyComplete, allComplete);
-    } else {
-      return Display.render(todos, filter, activeCount, anyComplete, allComplete);
+        app.start(4567);
     }
-  }
 
+    private static void logException(Exception e) {
+        e.printStackTrace(); // log this in real life
+    }
 
+    private static String renderEditTodo(Context ctx) {
+        ctx.res().contentType = "html";
+        return Edit.withoutLayout().render(ToDoService.find(ctx.pathParam("id")));
+    }
+
+    private static String renderTodos(Context ctx) {
+        ctx.res().contentType = "html";
+        String statusStr = ctx.req().getParameter("status");
+
+        List<ToDo> todos = ToDoService.ofStatus(statusStr);
+        String filter = statusStr == null ? "" : statusStr;
+        int activeCount = ToDoService.ofStatus(Status.active).size();
+        boolean anyComplete = !ToDoService.ofStatus(Status.complete).isEmpty();
+        boolean allComplete = ToDoService.all().size() == ToDoService.ofStatus(Status.complete).size();
+
+        if ("true".equals(ctx.req().getParameter("hx-request"))) {
+            return Display.withoutLayout().render(todos, filter, activeCount, anyComplete, allComplete);
+        } else {
+            return Display.render(todos, filter, activeCount, anyComplete, allComplete);
+        }
+    }
 }

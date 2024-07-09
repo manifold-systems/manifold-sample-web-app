@@ -31,7 +31,7 @@ public class ToDoService {
   }
 
   public static List<ToDo> ofStatus(String statusString) {
-    return statusString.isNullOrBlank()
+    return statusString == null || statusString.isEmpty
       ? DATA
       : ofStatus(Status.valueOf(Status.class, statusString.toLowerCase()));
   }

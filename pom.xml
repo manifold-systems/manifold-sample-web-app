@@ -40,18 +40,15 @@
             <artifactId>manifold-collections</artifactId>
             <version>${manifold.version}</version>
         </dependency>
+
+        <!-- Javalin -->
         <dependency>
-            <groupId>systems.manifold</groupId>
-            <artifactId>manifold-text</artifactId>
-            <version>${manifold.version}</version>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+            <version>6.1.6</version>
         </dependency>
 
-        <!--SparkJava -->
-        <dependency>
-            <groupId>com.sparkjava</groupId>
-            <artifactId>spark-core</artifactId>
-            <version>2.7.2</version>
-        </dependency>
+        <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>

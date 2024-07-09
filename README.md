@@ -1,9 +1,9 @@
 # manifold-sample-web-app
 A sample web application using:
-* [Manifold : Templates](http://manifold.systems/manifold-templates.html)
-* [Manifold : JSON Schema](http://manifold.systems/docs.html#json-and-json-schema)
-* [Spark*Java*](http://sparkjava.com/)
+* [javalin](http://javalin.io/)
 * [htmx](https://htmx.org/)
+* [manifold-templates](https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-templates)
+* [manifold-json](https://github.com/manifold-systems/manifold/tree/master/manifold-deps-parent/manifold-json)
 
 ## Usage
 
