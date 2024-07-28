@@ -24,11 +24,11 @@ import java.util.*;
  * </ul>
  */
 public class App {
-
     public static void main(String[] args) {
-
-        var app = Javalin.create(config ->
-                config.staticFiles.add("/public", Location.CLASSPATH));
+        var app = Javalin.create(config -> {
+            config.staticFiles.add("/public", Location.CLASSPATH);
+            config.http.defaultContentType = "html";
+        });
 
         ManifoldTemplates.setDefaultLayout("todoapp", Main.asLayout());
 
@@ -86,12 +86,10 @@ public class App {
     }
 
     private static String renderEditTodo(Context ctx) {
-        ctx.res().contentType = "html";
         return Edit.withoutLayout().render(ToDoService.find(ctx.pathParam("id")));
     }
 
     private static String renderTodos(Context ctx) {
-        ctx.res().contentType = "html";
         String statusStr = ctx.req().getParameter("status");
 
         List<ToDo> todos = ToDoService.ofStatus(statusStr);
